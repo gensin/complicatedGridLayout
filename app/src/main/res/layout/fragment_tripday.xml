@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_parent"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/day_number"
+            fontPath="fonts/AvenirNext-Medium.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="24"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingPrefix"/>
+
+        <TextView
+            android:id="@+id/day_text"
+            fontPath="fonts/AvenirNext-Medium.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sundy"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="@+id/day_number"
+            app:layout_constraintStart_toStartOf="@+id/day_number"
+            app:layout_constraintTop_toBottomOf="@+id/day_number"
+            tools:ignore="MissingPrefix"/>
+
+        <TextView
+            android:id="@+id/trips_number"
+            fontPath="fonts/AvenirNext-Medium.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="@+id/day_text"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="@+id/day_text"
+            app:layout_constraintTop_toBottomOf="@+id/day_text"
+            tools:ignore="MissingPrefix"/>
+
+        <ImageView
+            android:id="@+id/trips_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/trips_number"
+            app:layout_constraintEnd_toEndOf="@+id/day_text"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="@+id/day_text"
+            app:layout_constraintTop_toTopOf="@+id/trips_number"
+            app:srcCompat="@drawable/icon_trip_tripslist"/>
+
+        <ImageView
+            android:id="@+id/achievements_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/icon_medal_tripslist"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/notification"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/notification_badge_red"
+        android:paddingBottom="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp"
+        android:text="3"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_7ssp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/item_parent"
+        app:layout_constraintEnd_toStartOf="@+id/item_parent"
+        app:layout_constraintStart_toStartOf="@+id/item_parent"
+        app:layout_constraintTop_toTopOf="@+id/item_parent"
+        tools:ignore="MissingPrefix" />
+
+</android.support.constraint.ConstraintLayout>
