@@ -16,11 +16,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.gensin.tripslist.R;
-import es.gensin.tripslist.tripslist.dummy.DummyContent;
-import es.gensin.tripslist.tripslist.dummy.DummyContent.*;
+import es.gensin.tripslist.tripslist.dummy.DummyItem;
 import rx.functions.Action2;
 
-import static android.view.ViewTreeObserver.*;
+import static android.view.ViewTreeObserver.OnPreDrawListener;
 
 public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -51,7 +50,6 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
            view.getViewTreeObserver().addOnPreDrawListener(new OnPreDrawListener() {
                @Override
                public boolean onPreDraw() {
-                   final int type = viewType;
                    final ViewGroup.LayoutParams lp = view.getLayoutParams();
                    if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
                        StaggeredGridLayoutManager.LayoutParams sglp =
@@ -79,7 +77,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         DummyItem item = mValues.get(position);
         switch (holder.getItemViewType()) {
             case BIG_TYPE:
-                onBindBigViewHolder((BigViewHolder) holder, position, item);
+                onBindBigViewHolder((BigViewHolder) holder, item);
                 break;
             case NORMAL_TYPE:
                 onBindNormalViewHolder((NormalViewHolder) holder, position, item);
@@ -170,7 +168,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     /*************************************
      ********** PRIVATE METHODS **********
      *************************************/
-    private void onBindBigViewHolder(BigViewHolder holder, int position, DummyItem item) {
+    private void onBindBigViewHolder(BigViewHolder holder, DummyItem item) {
         holder.dayNumber.setText(item.dayNumber);
         holder.dayText.setText(item.dayText);
         holder.tripsNumber.setText(item.tripNumber);
