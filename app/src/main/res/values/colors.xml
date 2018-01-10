@@ -1,80 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Copyright (c) Microsoft Corporation. All rights reserved.
--->
 <resources>
   <color name="colorPrimary">@color/drivesmart_green</color>
   <color name="colorPrimaryDark">@color/colorPrimary</color>
   <color name="colorAccent">@color/colorPrimary</color>
 
-  <!-- Green -->
-  <color name="drivesmart_green_disabled">#b2ecdd</color>
-  <color name="blocking_switch_color">#20C59B</color>
   <color name="drivesmart_green">#20C69B</color>
-  <color name="label_green">#21C59E</color>
-  <color name="home_green_color">#05C287</color>
-  <color name="score_green_dark">#19A57E</color>
   <color name="dark_green">#1E8378</color>
-
-  <!-- Orange -->
-  <color name="orange">#FF8C00</color>
-  <color name="orangePressed">#FFA333</color>
-
-  <!-- Blue -->
-  <color name="blueBackground">#33BCF0</color>
-  <color name="primaryPressed">#0089BD</color>
-
-  <!-- Red -->
-  <color name="red">#F63B3B</color>
-  <color name="score_red">#FF1D1D</color>
   <color name="red_error">#DD484E</color>
-  <color name="text_stop_button_color">#D92E36</color>
-
-  <!-- Purple -->
-  <color name="purple">#68217A</color>
-  <color name="purplePressed">#864D95</color>
-
-  <!-- Yellow -->
-  <color name="score_yellow">#F6EE21</color>
-
-  <!-- Black & Grey-->
-  <color name="black">@android:color/black</color>
-  <color name="dimBlack">#AA000000</color>
-  <color name="demiTransparentBlack">#55000000</color>
-  <color name="generalTextColor">#303030</color>
-  <color name="ErrorTitleTextColor">#4D4D4D</color>
-  <color name="tabbarColor">#1D2D38</color>
-  <color name="secondaryTextColor">#6A6A6A</color>
-  <color name="colorGrey">#686868</color>
-  <color name="light_grey">#7B7B7B</color>
-  <color name="smallMentionColor">#A9A9A9</color>
-  <color name="switchSubtitleColor">#A8A8A8</color>
-  <color name="membershipSubtitleColor">#AFAFAF</color>
-  <color name="subtitleTextColor">#B0B0B0</color>
-  <color name="background_line">#D1D5DE</color>
-  <color name="inputTextLine">#DADADA</color>
-  <color name="buttonDisabledColor">#D4D4D4</color>
-  <color name="helpulLinksDivider">#E5E5E5</color>
-  <color name="backgroungGrey">#F4F4F4</color>
-  <color name="no_profile_pic_background">#EEEEEE</color>
-
-  <!-- White -->
-  <color name="biscuit_border">#EFEFEF</color>
   <color name="white">#ffffff</color>
-  <color name="textColorPrimary">@android:color/white</color>
-  <color name="buttonColorPressed">#50FFFFFF</color>
-  <color name="footerDivider">#80FFFFFF</color>
-  <color name="creamWhite">#F6F6F6</color>
-
-  <!-- Smartmiles medals colors -->
-  <color name="color_medal_bronze">#c67c4d</color>
-  <color name="color_medal_silver">#cfc7b3</color>
-  <color name="color_medal_gold">#f5b940</color>
-
-  <array name="refreshColors">
-    <item>@color/colorAccent</item>
-    <item>@color/colorPrimary</item>
-    <item>@color/purple</item>
-  </array>
 
 </resources>
