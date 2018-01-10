@@ -3,8 +3,8 @@ package es.gensin.tripslist.tripslist;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +38,15 @@ public class TripDaysFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new GridLayoutManager(context, COLUMN_COUNT));
-            recyclerView.setAdapter(new TripDaysAdapter(getContext(), DummyContent.ITEMS, tripDayItem -> {
+            StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(COLUMN_COUNT, StaggeredGridLayoutManager.VERTICAL);
+            recyclerView.setLayoutManager(gridLayoutManager);
+            recyclerView.setAdapter(new TripDaysAdapter(getContext(), DummyContent.ITEMS, (tripDayItem, position) -> {
                 // TODO: 08/01/2018 Do Something with the item
+                TripDaysAdapter adapter = (TripDaysAdapter) recyclerView.getAdapter();
+                adapter.clearBigPosition();
+                Integer bigPosition = position + (COLUMN_COUNT - (position % COLUMN_COUNT));
+                adapter.setBigItemPosition(tripDayItem, bigPosition);
+                recyclerView.scrollToPosition(bigPosition);
             }));
         }
         return view;

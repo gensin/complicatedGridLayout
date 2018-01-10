@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,9 @@ import butterknife.ButterKnife;
 import es.gensin.tripslist.R;
 import es.gensin.tripslist.tripslist.dummy.DummyContent.*;
 import rx.functions.Action1;
+import rx.functions.Action2;
+
+import static android.view.ViewTreeObserver.*;
 
 public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -24,10 +29,11 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int NORMAL_TYPE = 0;
 
     private final List<DummyItem> mValues;
-    private final Action1<DummyItem> onItemClick;
+    private final Action2<DummyItem, Integer> onItemClick;
     private final Context context;
+    private Integer bigPosition;
 
-    public TripDaysAdapter(Context context, List<DummyItem> items, Action1<DummyItem> onItemClick) {
+    public TripDaysAdapter(Context context, List<DummyItem> items, Action2<DummyItem, Integer> onItemClick) {
         this.mValues = items;
         this.onItemClick = onItemClick;
         this.context = context;
@@ -42,7 +48,25 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (viewType == BIG_TYPE){
            view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fragment_tripday_detail, parent, false);
-            return new BigViewHolder(view);
+           view.getViewTreeObserver().addOnPreDrawListener(new OnPreDrawListener() {
+               @Override
+               public boolean onPreDraw() {
+                   final int type = viewType;
+                   final ViewGroup.LayoutParams lp = view.getLayoutParams();
+                   if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
+                       StaggeredGridLayoutManager.LayoutParams sglp =
+                               (StaggeredGridLayoutManager.LayoutParams) lp;
+                       sglp.setFullSpan(true);
+                       view.setLayoutParams(sglp);
+                       final StaggeredGridLayoutManager lm =
+                               (StaggeredGridLayoutManager) ((RecyclerView) parent).getLayoutManager();
+                       lm.invalidateSpanAssignments();
+                   }
+                   view.getViewTreeObserver().removeOnPreDrawListener(this);
+                   return true;
+               }
+           });
+           return new BigViewHolder(view);
         } else {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fragment_tripday, parent, false);
@@ -71,9 +95,9 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         holder.tripDayItem.setOnClickListener(v -> {
             if (null != onItemClick) {
-                item.isPressed =!item.isPressed;
-                changeItemView(holder, item);
-                onItemClick.call(item);
+//                item.isPressed =!item.isPressed;
+//                changeItemView(holder, item);
+                onItemClick.call(item, position);
             }
         });
 
@@ -82,7 +106,16 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void onBindBigViewHolder(BigViewHolder holder, int position, DummyItem item) {
+        holder.dayNumber.setText(item.dayNumber);
+        holder.dayText.setText(item.dayText);
+        holder.tripsNumber.setText(item.tripNumber);
+        holder.closeDetail.setOnClickListener(view -> {
+            this.clearBigPosition();
+            this.notifyDataSetChanged();
+        });
 
+        setNotification(holder.notification, item);
+        setAchievements(holder.achievementsIcon, item);
     }
 
     @Override
@@ -92,10 +125,23 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 5){
+        if (bigPosition != null && position == bigPosition){
             return BIG_TYPE;
         }
         return NORMAL_TYPE;
+    }
+
+    public void setBigItemPosition(DummyItem bigItem, Integer position) {
+        this.bigPosition = position;
+        mValues.add(position, bigItem);
+        this.notifyDataSetChanged();
+    }
+
+    public void clearBigPosition() {
+        if (bigPosition != null){
+            mValues.remove(bigPosition.intValue());
+            this.bigPosition = null;
+        }
     }
 
     public class NormalViewHolder extends RecyclerView.ViewHolder {
