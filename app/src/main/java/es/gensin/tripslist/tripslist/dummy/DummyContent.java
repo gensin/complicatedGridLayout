@@ -40,7 +40,7 @@ public class DummyContent {
 
     private static boolean makeAchievements() {
         Random rand = new Random();
-        int  n = rand.nextInt(1);
+        int  n = rand.nextInt(2);
         return n == 0;
     }
 

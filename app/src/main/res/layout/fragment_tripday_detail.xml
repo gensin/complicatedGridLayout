@@ -10,6 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,24 +29,24 @@
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            tools:ignore="MissingPrefix"/>
+            tools:ignore="MissingPrefix" />
 
         <TextView
             android:id="@+id/day_text"
             fontPath="fonts/AvenirNext-Medium.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sundy"
+            android:text="Wednesday"
             android:textColor="@color/white"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/day_number"
-            tools:ignore="MissingPrefix"/>
+            tools:ignore="MissingPrefix" />
 
         <TextView
             android:id="@+id/trips_number"
-            fontPath="fonts/AvenirNext-Medium.ttf"
+            fontPath="fonts/AvenirNext-DemiBold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -55,7 +57,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/day_text"
-            tools:ignore="MissingPrefix"/>
+            tools:ignore="MissingPrefix" />
 
         <ImageView
             android:id="@+id/trips_icon"
@@ -65,35 +67,24 @@
             app:layout_constraintBottom_toBottomOf="@+id/trips_number"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/trips_number"
-            app:srcCompat="@drawable/icon_trip_tripslist"/>
-
-        <ImageView
-            android:id="@+id/achievements_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_marginEnd="3dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/icon_medal_tripslist"/>
+            app:srcCompat="@drawable/icon_trip_tripslist" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.50"/>
+            app:layout_constraintGuide_percent="0.50" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="52dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintStart_toEndOf="@+id/day_text"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:srcCompat="@drawable/icon_bad_default_white"/>
+            app:srcCompat="@drawable/icon_bad_default_white" />
 
         <TextView
             android:id="@+id/trips_score"
@@ -101,18 +92,26 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="24"
+            fontPath="fonts/AvenirNext-DemiBold.ttf"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            tools:ignore="MissingPrefix"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/guideline"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/100"
+            fontPath="fonts/AvenirNext-Medium.ttf"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            tools:ignore="MissingPrefix"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/trips_score"
-            app:layout_constraintTop_toTopOf="@+id/guideline"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -122,7 +121,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:srcCompat="@drawable/icon_distance_white"/>
+            app:srcCompat="@drawable/icon_distance_white" />
 
         <TextView
             android:id="@+id/trips_distance"
@@ -130,9 +129,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="105 km"
+            fontPath="fonts/AvenirNext-DemiBold.ttf"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            tools:ignore="MissingPrefix"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/guideline"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -142,7 +145,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/trips_distance"
             app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:srcCompat="@drawable/icon_time_tripslistday"/>
+            app:srcCompat="@drawable/icon_time_tripslistday" />
 
         <TextView
             android:id="@+id/trips_time"
@@ -150,11 +153,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="18 h"
+            fontPath="fonts/AvenirNext-DemiBold.ttf"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            tools:ignore="MissingPrefix"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toStartOf="@+id/close_detail"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/guideline"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <ImageView
             android:id="@+id/close_detail"
@@ -164,24 +171,24 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:srcCompat="@drawable/icon_close_alert_white"/>
+            app:srcCompat="@drawable/icon_close_alert_white" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/achievements_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
             android:layout_marginEnd="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/icon_medal_tripslist"/>
+            app:srcCompat="@drawable/icon_medal_tripslist" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.08"/>
+            app:layout_constraintGuide_percent="0.12" />
 
     </android.support.constraint.ConstraintLayout>
 

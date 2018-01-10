@@ -36,17 +36,14 @@ public class TripDaysFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(COLUMN_COUNT, StaggeredGridLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(gridLayoutManager);
             recyclerView.setAdapter(new TripDaysAdapter(getContext(), DummyContent.ITEMS, (tripDayItem, position) -> {
-                // TODO: 08/01/2018 Do Something with the item
                 TripDaysAdapter adapter = (TripDaysAdapter) recyclerView.getAdapter();
                 adapter.clearBigPosition();
-                Integer bigPosition = position + (COLUMN_COUNT - (position % COLUMN_COUNT));
-                adapter.setBigItemPosition(tripDayItem, bigPosition);
-                recyclerView.scrollToPosition(bigPosition);
+                int newPosition = adapter.setBigItemPosition(tripDayItem, position, COLUMN_COUNT);
+                recyclerView.scrollToPosition(newPosition);
             }));
         }
         return view;

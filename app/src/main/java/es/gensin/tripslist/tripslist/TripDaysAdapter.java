@@ -8,7 +8,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +16,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.gensin.tripslist.R;
+import es.gensin.tripslist.tripslist.dummy.DummyContent;
 import es.gensin.tripslist.tripslist.dummy.DummyContent.*;
-import rx.functions.Action1;
 import rx.functions.Action2;
 
 import static android.view.ViewTreeObserver.*;
@@ -32,6 +31,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final Action2<DummyItem, Integer> onItemClick;
     private final Context context;
     private Integer bigPosition;
+    private Integer selectedPosition;
 
     public TripDaysAdapter(Context context, List<DummyItem> items, Action2<DummyItem, Integer> onItemClick) {
         this.mValues = items;
@@ -85,37 +85,6 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 onBindNormalViewHolder((NormalViewHolder) holder, position, item);
                 break;
         }
-
-    }
-
-    private void onBindNormalViewHolder(NormalViewHolder holder, int position, DummyItem item) {
-        holder.dayNumber.setText(item.dayNumber);
-        holder.dayText.setText(item.dayText);
-        holder.tripsNumber.setText(item.tripNumber);
-
-        holder.tripDayItem.setOnClickListener(v -> {
-            if (null != onItemClick) {
-//                item.isPressed =!item.isPressed;
-//                changeItemView(holder, item);
-                onItemClick.call(item, position);
-            }
-        });
-
-        setNotification(holder.notification, item);
-        setAchievements(holder.achievementsIcon, item);
-    }
-
-    private void onBindBigViewHolder(BigViewHolder holder, int position, DummyItem item) {
-        holder.dayNumber.setText(item.dayNumber);
-        holder.dayText.setText(item.dayText);
-        holder.tripsNumber.setText(item.tripNumber);
-        holder.closeDetail.setOnClickListener(view -> {
-            this.clearBigPosition();
-            this.notifyDataSetChanged();
-        });
-
-        setNotification(holder.notification, item);
-        setAchievements(holder.achievementsIcon, item);
     }
 
     @Override
@@ -131,10 +100,16 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return NORMAL_TYPE;
     }
 
-    public void setBigItemPosition(DummyItem bigItem, Integer position) {
-        this.bigPosition = position;
-        mValues.add(position, bigItem);
+    public int setBigItemPosition(DummyItem bigItem, Integer position, int columns) {
+        Integer bigPosition = position + (columns - (position % columns));
+        if (bigPosition > mValues.size()){
+            this.bigPosition = mValues.size();
+        } else {
+            this.bigPosition = bigPosition;
+        }
+        mValues.add(this.bigPosition, bigItem);
         this.notifyDataSetChanged();
+        return this.bigPosition;
     }
 
     public void clearBigPosition() {
@@ -195,6 +170,48 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     /*************************************
      ********** PRIVATE METHODS **********
      *************************************/
+    private void onBindBigViewHolder(BigViewHolder holder, int position, DummyItem item) {
+        holder.dayNumber.setText(item.dayNumber);
+        holder.dayText.setText(item.dayText);
+        holder.tripsNumber.setText(item.tripNumber);
+        holder.closeDetail.setOnClickListener(view -> {
+            this.clearBigPosition();
+            this.notifyDataSetChanged();
+            item.isPressed = false;
+        });
+
+        setNotification(holder.notification, item);
+        setAchievements(holder.achievementsIcon, item);
+    }
+
+    private void onBindNormalViewHolder(NormalViewHolder holder, int position, DummyItem item) {
+        holder.dayNumber.setText(item.dayNumber);
+        holder.dayText.setText(item.dayText);
+        holder.tripsNumber.setText(item.tripNumber);
+
+        holder.tripDayItem.setOnClickListener(v -> {
+            if (onItemClick != null) {
+                item.isPressed = true;
+                if (this.bigPosition != null && position > this.bigPosition) {
+                    this.selectedPosition = position - 1;
+                } else {
+                    this.selectedPosition = position;
+                }
+                onItemClick.call(item, position);
+            }
+        });
+
+        if (selectedPosition != null && item.isPressed && position == selectedPosition){
+            holder.tripDayItem.setBackground(ContextCompat.getDrawable(context, R.drawable.button_background_pressed));
+        } else {
+            item.isPressed = false;
+            holder.tripDayItem.setBackground(ContextCompat.getDrawable(context, R.drawable.button_background));
+        }
+
+        setNotification(holder.notification, item);
+        setAchievements(holder.achievementsIcon, item);
+    }
+
     private void setAchievements(ImageView achievementsIcon, DummyItem item) {
         if(item.hasAchievement){
             achievementsIcon.setVisibility(View.VISIBLE);
@@ -210,10 +227,5 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else {
             notification.setVisibility(View.GONE);
         }
-    }
-
-    private void changeItemView(NormalViewHolder holder, DummyItem item) {
-        // TODO: 08/01/2018 change background or something to show is clicked
-        holder.tripDayItem.setBackground(ContextCompat.getDrawable(context, R.drawable.button_background_pressed));
     }
 }

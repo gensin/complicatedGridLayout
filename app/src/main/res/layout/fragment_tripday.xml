@@ -29,7 +29,8 @@
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingPrefix"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingPrefix" />
 
         <TextView
             android:id="@+id/day_text"
@@ -42,32 +43,39 @@
             app:layout_constraintEnd_toEndOf="@+id/day_number"
             app:layout_constraintStart_toStartOf="@+id/day_number"
             app:layout_constraintTop_toBottomOf="@+id/day_number"
-            tools:ignore="MissingPrefix"/>
+            tools:ignore="MissingPrefix" />
 
         <TextView
             android:id="@+id/trips_number"
-            fontPath="fonts/AvenirNext-Medium.ttf"
+            fontPath="fonts/AvenirNext-DemiBold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="4dp"
             android:text="4"
             android:textColor="@color/white"
             android:textSize="@dimen/_11ssp"
-            app:layout_constraintEnd_toEndOf="@+id/day_text"
-            app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toStartOf="@+id/day_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/day_text"
-            tools:ignore="MissingPrefix"/>
+            tools:ignore="MissingPrefix" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
 
         <ImageView
             android:id="@+id/trips_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/trips_number"
-            app:layout_constraintEnd_toEndOf="@+id/day_text"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="@+id/day_text"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/trips_number"
-            app:srcCompat="@drawable/icon_trip_tripslist"/>
+            app:srcCompat="@drawable/icon_trip_tripslist" />
 
         <ImageView
             android:id="@+id/achievements_icon"
@@ -78,7 +86,7 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/icon_medal_tripslist"/>
+            app:srcCompat="@drawable/icon_medal_tripslist" />
 
     </android.support.constraint.ConstraintLayout>
 
