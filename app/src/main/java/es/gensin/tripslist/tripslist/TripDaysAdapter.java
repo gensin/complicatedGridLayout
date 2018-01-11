@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.gensin.tripslist.R;
+import es.gensin.tripslist.TripDaysHelper;
 import es.gensin.tripslist.tripslist.dummy.DummyItem;
 import rx.functions.Action2;
 
@@ -41,6 +42,8 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     /*************************************
      ********** PUBLIC METHODS ***********
      *************************************/
+
+    /********* Adapter Methods ***********/
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
@@ -76,11 +79,21 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         DummyItem item = mValues.get(position);
         switch (holder.getItemViewType()) {
-            case BIG_TYPE:
-                onBindBigViewHolder((BigViewHolder) holder, item);
-                break;
             case NORMAL_TYPE:
-                onBindNormalViewHolder((NormalViewHolder) holder, position, item);
+                ((NormalViewHolder) holder).onBindItem(context, item, position, selectedPosition, itemClick -> {
+                    if (onItemClick != null) {
+                        item.isPressed = true;
+                        changeSelectedPosition(position);
+                        onItemClick.call(item, position);
+                    }
+                });
+                break;
+            case BIG_TYPE:
+                ((BigViewHolder) holder).onBindItem(item, onCloseClick -> {
+                    this.clearBigPosition();
+                    item.isPressed = false;
+                    this.notifyDataSetChanged();
+                });
                 break;
         }
     }
@@ -97,6 +110,8 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
         return NORMAL_TYPE;
     }
+
+    /********* Fragment Communication Methods ***********/
 
     public int setBigItemPosition(DummyItem bigItem, Integer position, int columns) {
         Integer bigPosition = position + (columns - (position % columns));
@@ -117,113 +132,14 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public class NormalViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.achievements_icon)
-        ImageView achievementsIcon;
-        @BindView(R.id.day_text)
-        TextView dayText;
-        @BindView(R.id.day_number)
-        TextView dayNumber;
-        @BindView(R.id.trips_number)
-        TextView tripsNumber;
-        @BindView(R.id.notification)
-        TextView notification;
-        @BindView(R.id.item_parent)
-        ConstraintLayout tripDayItem;
-
-        public NormalViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
-
-    public class BigViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.achievements_icon)
-        ImageView achievementsIcon;
-        @BindView(R.id.close_detail)
-        ImageView closeDetail;
-        @BindView(R.id.day_text)
-        TextView dayText;
-        @BindView(R.id.day_number)
-        TextView dayNumber;
-        @BindView(R.id.trips_number)
-        TextView tripsNumber;
-        @BindView(R.id.notification)
-        TextView notification;
-        @BindView(R.id.item_parent)
-        ConstraintLayout tripDayItem;
-        @BindView(R.id.trips_time)
-        TextView tripsTime;
-        @BindView(R.id.trips_distance)
-        TextView tripsDistance;
-        @BindView(R.id.trips_score)
-        TextView tripsScore;
-
-        public BigViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
-
     /*************************************
      ********** PRIVATE METHODS **********
      *************************************/
-    private void onBindBigViewHolder(BigViewHolder holder, DummyItem item) {
-        holder.dayNumber.setText(item.dayNumber);
-        holder.dayText.setText(item.dayText);
-        holder.tripsNumber.setText(item.tripNumber);
-        holder.closeDetail.setOnClickListener(view -> {
-            this.clearBigPosition();
-            this.notifyDataSetChanged();
-            item.isPressed = false;
-        });
-
-        setNotification(holder.notification, item);
-        setAchievements(holder.achievementsIcon, item);
-    }
-
-    private void onBindNormalViewHolder(NormalViewHolder holder, int position, DummyItem item) {
-        holder.dayNumber.setText(item.dayNumber);
-        holder.dayText.setText(item.dayText);
-        holder.tripsNumber.setText(item.tripNumber);
-
-        holder.tripDayItem.setOnClickListener(v -> {
-            if (onItemClick != null) {
-                item.isPressed = true;
-                if (this.bigPosition != null && position > this.bigPosition) {
-                    this.selectedPosition = position - 1;
-                } else {
-                    this.selectedPosition = position;
-                }
-                onItemClick.call(item, position);
-            }
-        });
-
-        if (selectedPosition != null && item.isPressed && position == selectedPosition){
-            holder.tripDayItem.setBackground(ContextCompat.getDrawable(context, R.drawable.button_background_pressed));
+    private void changeSelectedPosition(int position) {
+        if (this.bigPosition != null && position > this.bigPosition) {
+            this.selectedPosition = position - 1;
         } else {
-            item.isPressed = false;
-            holder.tripDayItem.setBackground(ContextCompat.getDrawable(context, R.drawable.button_background));
-        }
-
-        setNotification(holder.notification, item);
-        setAchievements(holder.achievementsIcon, item);
-    }
-
-    private void setAchievements(ImageView achievementsIcon, DummyItem item) {
-        if(item.hasAchievement){
-            achievementsIcon.setVisibility(View.VISIBLE);
-        } else {
-            achievementsIcon.setVisibility(View.GONE);
-        }
-    }
-
-    private void setNotification(TextView notification, DummyItem item) {
-        if (item.tripsUnseeing > 0){
-            notification.setVisibility(View.VISIBLE);
-            notification.setText(String.valueOf(item.tripsUnseeing));
-        } else {
-            notification.setVisibility(View.GONE);
+            this.selectedPosition = position;
         }
     }
 }
