@@ -18,25 +18,25 @@ import es.gensin.tripslist.tripslist.dummy.DummyItem;
 
 class BigViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.achievements_icon)
-    private ImageView achievementsIcon;
+    ImageView achievementsIcon;
     @BindView(R.id.close_detail)
-    private ImageView closeDetail;
+    ImageView closeDetail;
     @BindView(R.id.day_text)
-    private TextView dayText;
+    TextView dayText;
     @BindView(R.id.day_number)
-    private TextView dayNumber;
+    TextView dayNumber;
     @BindView(R.id.trips_number)
-    private TextView tripsNumber;
+    TextView tripsNumber;
     @BindView(R.id.notification)
-    private TextView notification;
+    TextView notification;
     @BindView(R.id.item_parent)
-    private ConstraintLayout tripDayItem;
+    ConstraintLayout tripDayItem;
     @BindView(R.id.trips_time)
-    private TextView tripsTime;
+    TextView tripsTime;
     @BindView(R.id.trips_distance)
-    private TextView tripsDistance;
+    TextView tripsDistance;
     @BindView(R.id.trips_score)
-    private TextView tripsScore;
+    TextView tripsScore;
 
     BigViewHolder(View view) {
             super(view);

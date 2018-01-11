@@ -20,17 +20,17 @@ import es.gensin.tripslist.tripslist.dummy.DummyItem;
 
 class NormalViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.achievements_icon)
-    private ImageView achievementsIcon;
+    ImageView achievementsIcon;
     @BindView(R.id.day_text)
-    private TextView dayText;
+    TextView dayText;
     @BindView(R.id.day_number)
-    private TextView dayNumber;
+    TextView dayNumber;
     @BindView(R.id.trips_number)
-    private TextView tripsNumber;
+    TextView tripsNumber;
     @BindView(R.id.notification)
-    private TextView notification;
+    TextView notification;
     @BindView(R.id.item_parent)
-    private ConstraintLayout tripDayItem;
+    ConstraintLayout tripDayItem;
 
     NormalViewHolder(View view) {
         super(view);
