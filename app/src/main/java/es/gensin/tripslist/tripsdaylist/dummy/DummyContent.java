@@ -1,4 +1,4 @@
-package es.gensin.tripslist.tripslist.dummy;
+package es.gensin.tripslist.tripsdaylist.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,12 +11,12 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static final List<TripDay> ITEMS = new ArrayList<TripDay>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, TripDay> ITEM_MAP = new HashMap<String, TripDay>();
 
     private static final int COUNT = 25;
 
@@ -27,15 +27,15 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(TripDay item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.dayNumber, item);
+        ITEM_MAP.put(item.day, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
+    private static TripDay createDummyItem(int position) {
         String dayNumber = String.valueOf(position);
 
-        return new DummyItem(dayNumber, makeDay(position), makeTrips(), makeUnseeing(), makeAchievements());
+        return new TripDay(dayNumber, makeDay(position), makeTrips(), makeUnseeing(), makeAchievements());
     }
 
     private static boolean makeAchievements() {

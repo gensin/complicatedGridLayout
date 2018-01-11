@@ -1,23 +1,18 @@
-package es.gensin.tripslist.tripslist;
+package es.gensin.tripslist.tripsdaylist.dayslist;
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import es.gensin.tripslist.R;
-import es.gensin.tripslist.TripDaysHelper;
-import es.gensin.tripslist.tripslist.dummy.DummyItem;
+import es.gensin.tripslist.tripsdaylist.dummy.Trip;
+import es.gensin.tripslist.tripsdaylist.dummy.TripDay;
+import rx.functions.Action1;
 import rx.functions.Action2;
 
 import static android.view.ViewTreeObserver.OnPreDrawListener;
@@ -27,16 +22,18 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int BIG_TYPE = 1;
     private static final int NORMAL_TYPE = 0;
 
-    private final List<DummyItem> mValues;
-    private final Action2<DummyItem, Integer> onItemClick;
+    private final List<TripDay> mValues;
+    private final Action2<TripDay, Integer> onTripDayClick;
     private final Context context;
     private Integer bigPosition;
     private Integer selectedPosition;
+    private Action1<Trip> onTripClick;
 
-    public TripDaysAdapter(Context context, List<DummyItem> items, Action2<DummyItem, Integer> onItemClick) {
+    public TripDaysAdapter(Context context, List<TripDay> items, Action2<TripDay, Integer> onTripDayClick, Action1<Trip> onTripClick) {
         this.mValues = items;
-        this.onItemClick = onItemClick;
+        this.onTripDayClick = onTripDayClick;
         this.context = context;
+        this.onTripClick = onTripClick;
     }
 
     /*************************************
@@ -77,23 +74,25 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        DummyItem item = mValues.get(position);
+        TripDay item = mValues.get(position);
         switch (holder.getItemViewType()) {
             case NORMAL_TYPE:
                 ((NormalViewHolder) holder).onBindItem(context, item, position, selectedPosition, itemClick -> {
-                    if (onItemClick != null) {
+                    if (onTripDayClick != null) {
                         item.isPressed = true;
                         changeSelectedPosition(position);
-                        onItemClick.call(item, position);
+                        onTripDayClick.call(item, position);
                     }
                 });
                 break;
             case BIG_TYPE:
-                ((BigViewHolder) holder).onBindItem(item, onCloseClick -> {
-                    this.clearBigPosition();
-                    item.isPressed = false;
-                    this.notifyDataSetChanged();
-                });
+                ((BigViewHolder) holder).onBindItem(item,
+                        onCloseClick -> {
+                            this.clearBigPosition();
+                            item.isPressed = false;
+                            this.notifyDataSetChanged();
+                        },
+                        this.onTripClick);
                 break;
         }
     }
@@ -113,7 +112,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     /********* Fragment Communication Methods ***********/
 
-    public int setBigItemPosition(DummyItem bigItem, Integer position, int columns) {
+    public int setBigItemPosition(TripDay bigItem, Integer position, int columns) {
         Integer bigPosition = position + (columns - (position % columns));
         if (bigPosition > mValues.size()){
             this.bigPosition = mValues.size();

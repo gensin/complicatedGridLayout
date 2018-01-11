@@ -8,7 +8,7 @@ import android.widget.FrameLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import es.gensin.tripslist.tripslist.TripDaysFragment;
+import es.gensin.tripslist.tripsdaylist.TripDaysFragment;
 
 public class MainActivity extends AppCompatActivity {
 

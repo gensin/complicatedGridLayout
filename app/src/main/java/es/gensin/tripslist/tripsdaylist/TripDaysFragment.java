@@ -1,4 +1,4 @@
-package es.gensin.tripslist.tripslist;
+package es.gensin.tripslist.tripsdaylist;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import es.gensin.tripslist.R;
-import es.gensin.tripslist.tripslist.dummy.DummyContent;
+import es.gensin.tripslist.tripsdaylist.dayslist.TripDaysAdapter;
+import es.gensin.tripslist.tripsdaylist.dummy.DummyContent;
 
 public class TripDaysFragment extends Fragment {
 
@@ -39,12 +40,16 @@ public class TripDaysFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(COLUMN_COUNT, StaggeredGridLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(gridLayoutManager);
-            recyclerView.setAdapter(new TripDaysAdapter(getContext(), DummyContent.ITEMS, (tripDayItem, position) -> {
-                TripDaysAdapter adapter = (TripDaysAdapter) recyclerView.getAdapter();
-                adapter.clearBigPosition();
-                int newPosition = adapter.setBigItemPosition(tripDayItem, position, COLUMN_COUNT);
-                recyclerView.scrollToPosition(newPosition);
-            }));
+            recyclerView.setAdapter(new TripDaysAdapter(getContext(), DummyContent.ITEMS,
+                    (tripDayItem, position) -> {
+                        TripDaysAdapter adapter = (TripDaysAdapter) recyclerView.getAdapter();
+                        adapter.clearBigPosition();
+                        int newPosition = adapter.setBigItemPosition(tripDayItem, position, COLUMN_COUNT);
+                        recyclerView.scrollToPosition(newPosition);
+                    },
+                    trip -> {
+                        // TODO: 11/01/2018 Do something with trip
+                    }));
         }
         return view;
     }

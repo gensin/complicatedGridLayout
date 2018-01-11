@@ -1,4 +1,4 @@
-package es.gensin.tripslist.tripslist;
+package es.gensin.tripslist.tripsdaylist.dayslist;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.gensin.tripslist.R;
-import es.gensin.tripslist.TripDaysHelper;
-import es.gensin.tripslist.tripslist.dummy.DummyItem;
+import es.gensin.tripslist.tripsdaylist.TripDaysHelper;
+import es.gensin.tripslist.tripsdaylist.dummy.TripDay;
 
 /**
  * Created on 11/01/18.
@@ -37,9 +37,9 @@ class NormalViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, view);
     }
 
-    void onBindItem(Context context, DummyItem item, int position, Integer selectedPosition, View.OnClickListener onCloseListener) {
-        dayNumber.setText(item.dayNumber);
-        dayText.setText(item.dayText);
+    void onBindItem(Context context, TripDay item, int position, Integer selectedPosition, View.OnClickListener onCloseListener) {
+        dayNumber.setText(item.day);
+        dayText.setText(item.dayTitle);
         tripsNumber.setText(item.tripNumber);
 
         tripDayItem.setOnClickListener(onCloseListener);
