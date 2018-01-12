@@ -2,6 +2,9 @@ package es.gensin.tripslist.tripsdaylist.dayslist;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -53,7 +56,7 @@ class BigViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, view);
     }
 
-    void onBindItem(TripDay item, View.OnClickListener onCloseClickListener, Action1<Trip> onTripClickListener) {
+    void onBindItem(Context context, TripDay item, View.OnClickListener onCloseClickListener, Action1<Trip> onTripClickListener) {
         dayNumber.setText(item.day);
         dayText.setText(item.dayTitle);
         tripsNumber.setText(String.valueOf(item.trips.size()));
@@ -62,6 +65,10 @@ class BigViewHolder extends RecyclerView.ViewHolder {
         TripDaysHelper.setNotification(notification, item);
         TripDaysHelper.setAchievements(achievementsIcon, item);
 
-        tripList.setAdapter(new TripAdapter(context, item.trips, onTripClickListener));
+        tripList.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+        tripList.setLayoutManager(mLayoutManager);
+        tripList.setItemAnimator(new DefaultItemAnimator());
+        tripList.setAdapter(new TripAdapter(this.context, item.trips, onTripClickListener));
     }
 }

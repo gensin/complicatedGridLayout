@@ -25,15 +25,19 @@ public class TripDay {
     //tr
     public ArrayList<Trip> trips;
 
-    public String tripNumber;
     public boolean hasAchievement;
     public boolean isPressed = false;
 
-    public TripDay(String day, String dayTitle, String tripNumber, int tripsUnseeing, boolean hasAchievement) {
+    public TripDay(String day, String dayTitle, int score, String smileScore, int distance,
+                   int time, int tripsUnseeing, ArrayList<Trip> trips, boolean hasAchievement) {
         this.day = day;
         this.dayTitle = dayTitle;
-        this.tripNumber = tripNumber;
+        this.score = score;
+        this.smileScore = smileScore;
+        this.distance = distance;
+        this.time = time;
         this.tripsUnseeing = tripsUnseeing;
+        this.trips = trips;
         this.hasAchievement = hasAchievement;
     }
 }

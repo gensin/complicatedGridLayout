@@ -40,7 +40,7 @@ class NormalViewHolder extends RecyclerView.ViewHolder {
     void onBindItem(Context context, TripDay item, int position, Integer selectedPosition, View.OnClickListener onCloseListener) {
         dayNumber.setText(item.day);
         dayText.setText(item.dayTitle);
-        tripsNumber.setText(item.tripNumber);
+        tripsNumber.setText(String.valueOf(item.trips.size()));
 
         tripDayItem.setOnClickListener(onCloseListener);
 

@@ -11,7 +11,6 @@ import java.util.List;
 
 import es.gensin.tripslist.R;
 import es.gensin.tripslist.tripsdaylist.dummy.Trip;
-import es.gensin.tripslist.tripsdaylist.dummy.TripDay;
 import rx.functions.Action1;
 
 /**
@@ -20,11 +19,12 @@ import rx.functions.Action1;
 
 public class TripAdapter extends RecyclerView.Adapter {
 
-    private static final int WORKING_TYPE = 0;
-    private static final int NORMAL_TYPE = 1;
-    private static final int TESTING_TYPE = 2;
-    private static final int SHORT_TYPE = 3;
-    private static final int BAD_TYPE = 4;
+    public static final int WORKING_TYPE = 0;
+    public static final int NORMAL_TYPE = 1;
+    public static final int TESTING_TYPE = 2;
+    public static final int SHORT_TYPE = 3;
+    public static final int BAD_TYPE = 4;
+    public static final int PENDING_TYPE = 5;
 
     private final List<Trip> trips;
     private final Action1<Trip> onItemClick;
@@ -65,13 +65,13 @@ public class TripAdapter extends RecyclerView.Adapter {
         Trip item = trips.get(position);
         switch (holder.getItemViewType()) {
             case WORKING_TYPE:
-                ((TripOnlyTextViewHolder)holder).onBindItem(item);
+                ((TripOnlyTextViewHolder)holder).onBindItem(item, WORKING_TYPE);
                 break;
             case TESTING_TYPE:
-                ((TripOnlyTextViewHolder)holder).onBindItem(item);
+                ((TripOnlyTextViewHolder)holder).onBindItem(item, TESTING_TYPE);
                 break;
             case BAD_TYPE:
-                ((TripOnlyTextViewHolder)holder).onBindItem(item);
+                ((TripOnlyTextViewHolder)holder).onBindItem(item, BAD_TYPE);
                 break;
             case NORMAL_TYPE:
             case SHORT_TYPE:

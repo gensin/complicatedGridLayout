@@ -86,7 +86,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 });
                 break;
             case BIG_TYPE:
-                ((BigViewHolder) holder).onBindItem(item,
+                ((BigViewHolder) holder).onBindItem(context, item,
                         onCloseClick -> {
                             this.clearBigPosition();
                             item.isPressed = false;

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import es.gensin.tripslist.R;
 import es.gensin.tripslist.tripsdaylist.dayslist.TripDaysAdapter;
-import es.gensin.tripslist.tripsdaylist.dummy.DummyContent;
+import es.gensin.tripslist.tripsdaylist.dummy.TripDayDummyContent;
 
 public class TripDaysFragment extends Fragment {
 
@@ -40,7 +40,7 @@ public class TripDaysFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(COLUMN_COUNT, StaggeredGridLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(gridLayoutManager);
-            recyclerView.setAdapter(new TripDaysAdapter(getContext(), DummyContent.ITEMS,
+            recyclerView.setAdapter(new TripDaysAdapter(getContext(), TripDayDummyContent.ITEMS,
                     (tripDayItem, position) -> {
                         TripDaysAdapter adapter = (TripDaysAdapter) recyclerView.getAdapter();
                         adapter.clearBigPosition();

@@ -19,9 +19,9 @@ public class Trip {
     //to
     public String to;
     //st
-    public String startTrip;
+    public String startTripTime;
     //et
-    public String stropTrip;
+    public String stopTripTime;
     //dis
     public Integer distance;
     //sco
@@ -34,15 +34,15 @@ public class Trip {
     public Boolean isSeen;
 
     public Trip(Integer tripId, ArrayList<Integer> originalTripId, Integer tripType, String from,
-                String to, String startTrip, String stropTrip, Integer distance, Integer score,
+                String to, String startTripTime, String stopTripTime, Integer distance, Integer score,
                 String smileScore, String tripInsight, Boolean isSeen) {
         this.tripId = tripId;
         this.originalTripId = originalTripId;
         this.tripType = tripType;
         this.from = from;
         this.to = to;
-        this.startTrip = startTrip;
-        this.stropTrip = stropTrip;
+        this.startTripTime = startTripTime;
+        this.stopTripTime = stopTripTime;
         this.distance = distance;
         this.score = score;
         this.smileScore = smileScore;

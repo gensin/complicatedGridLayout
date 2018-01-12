@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class DummyContent {
+public class TripDayDummyContent {
 
     /**
      * An array of sample (dummy) items.
@@ -35,7 +35,26 @@ public class DummyContent {
     private static TripDay createDummyItem(int position) {
         String dayNumber = String.valueOf(position);
 
-        return new TripDay(dayNumber, makeDay(position), makeTrips(), makeUnseeing(), makeAchievements());
+        return new TripDay(dayNumber, makeDay(position), makeScore(), "", makeDistance(),
+                makeTime(), makeUnseeing(), makeTrips(), makeAchievements());
+    }
+
+    private static int makeTime() {
+        Random rand = new Random();
+        int  n = rand.nextInt(78) + 5;
+        return n;
+    }
+
+    private static int makeDistance() {
+        Random rand = new Random();
+        int  n = rand.nextInt(200) + 10;
+        return n;
+    }
+
+    private static int makeScore() {
+        Random rand = new Random();
+        int  n = rand.nextInt(101);
+        return n;
     }
 
     private static boolean makeAchievements() {
@@ -78,9 +97,9 @@ public class DummyContent {
         return dayText;
     }
 
-    private static String makeTrips() {
+    private static ArrayList<Trip> makeTrips() {
         Random rand = new Random();
-        int  n = rand.nextInt(50);
-        return String.valueOf(n);
+        int n = rand.nextInt(50);
+        return new TripDummyContent().getItems();
     }
 }
