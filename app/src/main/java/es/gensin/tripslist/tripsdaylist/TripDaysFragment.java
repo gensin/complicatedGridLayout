@@ -8,6 +8,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import es.gensin.tripslist.R;
 import es.gensin.tripslist.tripsdaylist.dayslist.TripDaysAdapter;
@@ -49,6 +50,7 @@ public class TripDaysFragment extends Fragment {
                     },
                     trip -> {
                         // TODO: 11/01/2018 Do something with trip
+                        Toast.makeText(getContext(),String.valueOf(trip.tripId),Toast.LENGTH_SHORT).show();
                     }));
         }
         return view;

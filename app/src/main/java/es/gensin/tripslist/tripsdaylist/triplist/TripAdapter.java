@@ -65,16 +65,14 @@ public class TripAdapter extends RecyclerView.Adapter {
         Trip item = trips.get(position);
         switch (holder.getItemViewType()) {
             case WORKING_TYPE:
-                ((TripOnlyTextViewHolder)holder).onBindItem(item, WORKING_TYPE);
-                break;
             case TESTING_TYPE:
-                ((TripOnlyTextViewHolder)holder).onBindItem(item, TESTING_TYPE);
-                break;
             case BAD_TYPE:
-                ((TripOnlyTextViewHolder)holder).onBindItem(item, BAD_TYPE);
+                ((TripOnlyTextViewHolder)holder).onBindItem(item, holder.getItemViewType());
                 break;
             case NORMAL_TYPE:
             case SHORT_TYPE:
+                ((TripNormalViewHolder)holder).onBindItem(item, holder.getItemViewType(), () -> {}, onItemClick);
+                break;
         }
     }
 

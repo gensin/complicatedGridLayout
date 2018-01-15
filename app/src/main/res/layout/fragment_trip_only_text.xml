@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.46" />
 
     <TextView
         android:id="@+id/score"
@@ -115,7 +115,7 @@
         app:srcCompat="@drawable/icon_distance_gray" />
 
     <ImageView
-        android:id="@+id/avatar"
+        android:id="@+id/from_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -135,10 +135,10 @@
         android:text="We are processing all your data from this trip. We should have it ready for you shortly please come back in a few minutes."
         android:textColor="@color/tabbarColor"
         android:textSize="@dimen/_10ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/avatar"
+        app:layout_constraintBottom_toBottomOf="@+id/from_icon"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toEndOf="@+id/avatar"
-        app:layout_constraintTop_toTopOf="@+id/avatar"
+        app:layout_constraintStart_toEndOf="@+id/from_icon"
+        app:layout_constraintTop_toTopOf="@+id/from_icon"
         tools:ignore="MissingPrefix" />
 
     <android.support.constraint.Guideline

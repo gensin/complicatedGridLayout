@@ -36,7 +36,11 @@ public class TripDummyContent {
         String dayNumber = String.valueOf(position);
 
         return new Trip(getTripId(), null, getType(), getFrom(), getTo(), getDate(),
-                getDate(), makeDistance(), makeScore(), "", "", true);
+                getDate(), makeDistance(), makeScore(), "", "On this trip you had more over-speed incidents than average and your score is 10% bellow your own average ", true);
+    }
+
+    private String getScore() {
+        return null;
     }
 
     private  String getDate() {
@@ -54,31 +58,22 @@ public class TripDummyContent {
     }
 
     private  String getTo() {
-        return null;
+        return "C/ Andres Mellado 59";
     }
 
     private  String getFrom() {
-        return null;
+        return "C/ Principe de vergara 57";
     }
 
     private  Integer getTripId() {
         Random rand = new Random();
         int  n = rand.nextInt(5);
-        if (n < 2){
-            return null;
-        }
         return n;
     }
 
     private  int getType() {
         Random rand = new Random();
         int  n = rand.nextInt(4) + 1;
-        if (n == 1) {
-            n = 2;
-        }
-        if (n == 3) {
-            n = 4;
-        }
         return n;
     }
 

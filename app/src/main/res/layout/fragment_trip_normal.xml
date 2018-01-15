@@ -1,6 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/time_start"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="11:02 am"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        tools:ignore="MissingPrefix" />
+
+    <FrameLayout
+        android:id="@+id/item_less_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:padding="6dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="7dp"
+            android:layout_height="1dp"
+            android:background="@color/drivesmart_green"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/time_start"
+        app:layout_constraintStart_toEndOf="@+id/time_start"
+        app:layout_constraintTop_toTopOf="@+id/time_start"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/time_finish"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="12:03 am"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        tools:ignore="MissingPrefix" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_time_trips_green" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.46" />
+
+    <TextView
+        android:id="@+id/score"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="Not scoreable"
+        android:textColor="@color/subtitleTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/time_finish"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/time_finish"
+        android:visibility="gone"
+        tools:ignore="MissingPrefix" />
+
+    <LinearLayout
+        android:id="@+id/score_correct_complete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/time_finish"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/time_finish"
+        android:gravity="end"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/score_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_bad_default_red" />
+
+        <TextView
+            android:id="@+id/score_correct"
+            fontPath="fonts/AvenirNext-DemiBold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="25"
+            android:textColor="@color/tabbarColor"
+            android:textSize="@dimen/_10ssp"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:id="@+id/score_percentage"
+            fontPath="fonts/AvenirNext-DemiBold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="/100"
+            android:textColor="@color/membershipSubtitleColor"
+            android:textSize="@dimen/_10ssp"
+            tools:ignore="MissingPrefix" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/distance"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="105 km"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/score"
+        tools:ignore="MissingPrefix" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/score"
+        app:layout_constraintEnd_toStartOf="@+id/distance"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/score"
+        app:srcCompat="@drawable/icon_distance_green" />
+
+    <ImageView
+        android:id="@+id/from_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time_start"
+        app:srcCompat="@drawable/icon_pin_green_trips" />
+
+    <ImageView
+        android:id="@+id/to_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/from_icon"
+        app:srcCompat="@drawable/icon_pin_red_trips" />
+
+    <TextView
+        android:id="@+id/from_address"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="6dp"
+        android:text="C/ Manuel Becerra 58"
+        android:textColor="@color/tabbarColor"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/from_icon"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toEndOf="@+id/from_icon"
+        app:layout_constraintTop_toTopOf="@+id/from_icon"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/to_address"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Avda. Conde de Casal 85"
+        android:textColor="@color/tabbarColor"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/to_icon"
+        app:layout_constraintEnd_toStartOf="@+id/avatar_normal"
+        app:layout_constraintStart_toStartOf="@+id/from_address"
+        app:layout_constraintTop_toTopOf="@+id/to_icon"
+        tools:ignore="MissingPrefix" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <ImageView
+        android:id="@+id/avatar_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/distance"
+        app:srcCompat="@drawable/icon_avatar_trips" />
+
+    <TextView
+        android:id="@+id/like"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/comment_like_background"
+        android:drawableLeft="@drawable/icon_trips_hand_up"
+        android:drawablePadding="5dp"
+        android:gravity="right"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:text="35"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_normal"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/dislike"
+        fontPath="fonts/AvenirNext-DemiBold.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/comment_dislike_background"
+        android:drawableLeft="@drawable/icon_trips_hand_down"
+        android:drawablePadding="5dp"
+        android:gravity="right"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:text="35"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/like"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/like"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/avatar_pitch"
+        fontPath="fonts/AvenirNext-Medium.ttf"
+        android:layout_width="0dp"
+        android:layout_height="134dp"
+        android:text="Sorry but this trip is too short to be scored, trips should be larger than a minimum of 500 mts."
+        android:textColor="@color/tabbarColor"
+        android:textSize="@dimen/_10ssp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/dislike"
+        app:layout_constraintStart_toStartOf="@+id/like"
+        app:layout_constraintTop_toBottomOf="@+id/like"
+        tools:ignore="MissingPrefix" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.86" />
+
+    <ImageView
+        android:id="@+id/item_more_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_plus_trip" />
 
 </android.support.constraint.ConstraintLayout>
