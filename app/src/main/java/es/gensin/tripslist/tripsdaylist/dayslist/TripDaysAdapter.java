@@ -3,9 +3,11 @@ package es.gensin.tripslist.tripsdaylist.dayslist;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -19,6 +21,8 @@ import static android.view.ViewTreeObserver.OnPreDrawListener;
 
 public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private String TAG = "TAG.TripsDaysAdapter";
+
     private static final int BIG_TYPE = 1;
     private static final int NORMAL_TYPE = 0;
 
@@ -30,6 +34,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Action1<Trip> onTripClick;
 
     public TripDaysAdapter(Context context, List<TripDay> items, Action2<TripDay, Integer> onTripDayClick, Action1<Trip> onTripClick) {
+        Log.d(TAG, "Create Adapter");
         this.mValues = items;
         this.onTripDayClick = onTripDayClick;
         this.context = context;
@@ -74,6 +79,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        Log.d(TAG, "On Bind View Holder " + position);
         TripDay item = mValues.get(position);
         switch (holder.getItemViewType()) {
             case NORMAL_TYPE:
@@ -90,6 +96,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         onCloseClick -> {
                             this.clearBigPosition();
                             item.isPressed = false;
+                            Log.d(TAG, "Change values on close clicked");
                             this.notifyDataSetChanged();
                         },
                         this.onTripClick);
@@ -99,6 +106,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "get item count");
         return mValues.size();
     }
 
@@ -120,6 +128,7 @@ public class TripDaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             this.bigPosition = bigPosition;
         }
         mValues.add(this.bigPosition, bigItem);
+        Log.d(TAG, "Change values on day clicked");
         this.notifyDataSetChanged();
         return this.bigPosition;
     }
